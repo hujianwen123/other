@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="box"></div>
+    <input type="text">
+    <button>change</button>
+
+</body>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+<script>
+    var box = document.querySelector('#box'),
+        btn = document.querySelector('button'),
+        input = document.querySelector('input');
+    var model = {
+        info: 'hello word'
+    }
+    input.onkeyup = function(e) {
+        Object.defineProperty(model, 'info', {
+            get: function() {
+                return e.target.value
+            },
+            set: function(val) {
+                console.log(val);
+                box.innerHTML = val
+
+
+            }
+        })
+        box.innerHTML = model.info
+    }
+    btn.onclick = function() {
+        model.info = 'other info'
+    }
+</script>
+
+</html>

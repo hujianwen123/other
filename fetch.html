@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- Mock模拟数据请求 -->
+        <button @click="getMovies"> getMockData </button>
+        <div class="tab-content">
+            <div class="page n-hot active" data-hot=".n-hot" data-cid="c_dmLad">
+                <div class="list-wrap" style="margin-top: 0px;">
+
+                    <div class="item" data-id="503342" data-bid="dp_wx_home_movie_list" v-for=" item in movies " :key="item.id">
+                        <div class="main-block">
+                            <div class="avatar" sort-flag="">
+
+                                <div class="default-img-bg">
+                                    <img :src=" item.img.replace('w.h','128.180') " onerror="this.style.visibility='hidden'">
+                                </div>
+                            </div>
+                            <div class="mb-outline-b content-wrapper">
+
+
+                                <div class="column content">
+                                    <div class="box-flex movie-title" :style="{ display: 'flex'}">
+                                        <div class="title line-ellipsis v3dimax_title">
+                                            {{ item.nm }}
+                                        </div>
+
+                                        <span class="version" :class="[ item.version ]"></span>
+
+
+                                    </div>
+
+                                    <div class="detail column">
+
+
+                                        <div class="no-score">
+                                            {{ item.sc == 0 && '暂无评分' || item.sc }}
+                                        </div>
+
+
+
+
+                                        <div class="actor line-ellipsis">主演: {{ item.star }}</div>
+
+
+
+
+
+                                        <div class="show-info line-ellipsis"> {{ item.showInfo }} </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="button-block" data-id="503342">
+
+                                    <div class="btn" :class="[ item.preShow && 'pre' || 'normal']">
+                                        <span class="fix" data-bid="dp_wx_home_movie_btn">
+                              购票
+                            </span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- fetch请求动态数据 -->
+
+        <!-- <button @click="get"> get </button>
+        <p>get请求得到的结果 {{ num }} </p>
+        <button @click="post"> post </button>
+        <p>post请求得到的结果 {{ sum }} </p> -->
+
+    </div>
+
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            movies: null,
+            num: 0,
+            sum: 0
+        },
+        methods: {
+            getMovies() {
+                fetch('./movie.json')
+                    .then(data => data.json())
+                    .then(res => {
+                        console.log('res', res);
+                        this.movies = res.movieList
+
+                    })
+            }
+        }
+    })
+</script>
+
+</html>

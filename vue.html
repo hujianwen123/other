@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <Hello></Hello>
+        <template>
+      <p> 456 </p>
+    </template>
+        <!-- <Hello></Hello> -->
+    </div>
+
+
+    <!-- 组件的模板用一个template标签来完成 -->
+    <!-- 
+    缺点： 将来渲染到页面中
+    有解决方案
+   -->
+    <template id="hello">
+    <!-- template标签的直接子元素只能有一个 -->
+    <div>
+      今天是个好日子
+      <p> 123 </p>
+    </div>
+  </template>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    /* template标签在实例范围内是会被解析，将来不会在页面出现，但是实例范围外会出现 */
+    Vue.component('Hello', {
+        template: '#hello'
+    })
+
+    new Vue({
+        el: '#app'
+    })
+</script>
+
+</html>
